@@ -28,12 +28,10 @@ For n = 2:
     [HM_1,  HM_1]
     [HM_1, -HM_1]
 
-For n > 2: let k = log_2(n), and k is in the Natural Numbers
+For n > 2 and n is a power of 2: let k = log_2(n)
 
     [HM_(2^k-1),  HM_(2^k-1)]
     [HM_(2^k-1), -HM_(2^k-1)]
-
-Note: This implies that any valid construction requires n to be a power of 2.
 
 Example: If n = 4, then k = log_2(4) => k = 2
 
@@ -97,8 +95,7 @@ Example from above:
     [-1, -1,  1,  1]
     [-1,  1,  1, -1]
 
-This final matrix is our Hadamard Codebook. It maintains the property of 
-entirely orthoganal rows. 
+
 
 ## Encoding a message: 
 
