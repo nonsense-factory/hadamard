@@ -99,8 +99,7 @@ def introduce_error(codeword: np.ndarray, num_errors: int) -> np.ndarray :
     """
     corrupted = codeword
     for i in corrupted:
-        errors = random.randint(0, num_errors)
-        change = random.sample(range(0, codeword.shape[1]), errors)
+        change = random.sample(range(0, codeword.shape[1]), num_errors)
         for j in change:
             i[j] = 1 if i[j] == -1 else -1
 
@@ -175,7 +174,7 @@ def main():
     print("\t\tHadamard Error Correction Demonstration\n")
     print("\t\t***************************************\n\n")
     print("First we generate an NxN Hadamard matrix using the Sylvester method."
-    "For this demonstration we will be using N = 16. This will be the size of\n"
+    "\nFor this demonstration we will be using N = 16. This will be the size of "
     "the encoded 'word'.")
     print(HM)
     print("To create a codebook, we can take the Hadamard Matrix HM, and append"
@@ -187,8 +186,8 @@ def main():
     " completed codebook in codebook.md.")
     
     try:
-        user = input("\nPlease enter the maximum number of bit flip errors "
-        "posible per 'word': ")
+        user = input("\nPlease enter a number of random bit flip errors to "
+        "introduce per word: ")
         if user == "":
             print("Using default = 3")
             num_errors = 3

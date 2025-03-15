@@ -99,10 +99,17 @@ Example from above:
 
 ## Encoding a message: 
 
-Once we have a HC (Hadamard Codebook), we can associate binary strings
-with each row, or vector in the codebook. Going back to our example, HC of N=4 
-has 8 rows. This is a power of 2, so can encode all possible messages of size 
-2^M, in this case M = 3. 
+Hadamard encoding works similarly to a substitution cipher. We will be 
+associating some arbitrary 'words' with entries into our codebook, which uses
+the HC (Hadamard Codebook) to determine what encoded string to send per 'word'.
+
+In the simple example, we can associate each codeword in our codebook with the
+binary representation of the number of the row of the HC starting with 0, since
+we are working in the realm of computers here. 
+
+A 'word' could be any arbitrary thing of course, but a binary number is simple,
+and also counts the number of possible encoded words for us. This number will
+be equal to 2xN for the NxN Hadamard Matrix.
 
 Our full codebook then is the following: 
 
@@ -116,11 +123,6 @@ Our full codebook then is the following:
     |       5 | 1, 0, 1 |  [-1,  1, -1,  1] |
     |       6 | 1, 1, 0 |  [-1, -1,  1,  1] |
     |       7 | 1, 1, 1 |  [-1,  1,  1, -1] |
-
-Note that due to the property of Orthogonalty, you can multiply each codeword
-with HM (It is NOT necesarry to use the full codebook) to recover the row that 
-the message originally contained in.
-
 
 ## Decoding the message
 
@@ -184,14 +186,16 @@ the index into HM^-1.
 
 This is of course a bit silly, since we could just compare the message directly,
 there isn't much point to multiplying the vector by the matrix if there are no 
-errors. However, the usefullness of this encoding can be shown if we introduce
-random errors in the message.
+errors. Further, in this simple case, the Hamming distance, or number of 
+different elements per row, is 2. We will show that this distance is not 
+sufficient to recover from any error.
 
 ## Correcting Errors
 
 It has been shown that using Hadamard encoding, a Hadamard code of size 2^J can 
 represent all messages of length J + 1. In our example, the Hadamard codes are 
-size 4 vectors, therefore all messages of length J + 1 = 3 can be encoded. 
+size 4 vectors. 4 is 2^2, so J = 2. We can therefore calculate the number of 
+messages that can be encoded as 2^(j+1) = 2^3 = 8 messages.
 
 It has also been shown that for a given message, Hadamard encoding allows for 
 error correction in a number of bits equal to the following: 
@@ -210,9 +214,10 @@ error correction in a number of bits equal to the following:
 
 Therefore we cannot show error correction with the above example. 
 
-Included in this project is a python script that will demonstrate this property,
-along with a video demonstration that will show messages with length 5, which 
-can be used to encode all english letters, and some punctuation. 
+However increasing the size of the matrix will allow us to recover from errors,
+and this feature will be shown in detail through the included python script 
+hadamard.py.
+There will also be a video to go along with the code.
 
 ## Sources:
 
