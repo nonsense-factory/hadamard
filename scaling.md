@@ -11,8 +11,8 @@ Find X = floor(2^(j-2) - 1/2)
 
     N = 2, j = 1, 
     floor(2^(1-2) - 1/2)
-    floor(sqrt(2) - 1/2)
-    floor(0.914)
+    floor(2^(-1) - 1/2)
+    floor(0)
     X = 0
 
     HM_4:
@@ -108,7 +108,6 @@ Find X = floor(2^(j-2) - 1/2)
     X = 7
 
     HM_64: (I'm no longer printing these, if you really want to see it, generate with HM.py)
-
     N = 64, j = 6
     floor(2^(6-2) - 1/2)
     floor(2^(4) - 1/2)
@@ -124,7 +123,7 @@ Find X = floor(2^(j-2) - 1/2)
     X = 31
 
 
-    HM_64: (I'm no longer printing these, if you really want to see it, generate with HM.py)
+    HM_256: 
 
     N = 256, j = 8
     floor(2^(8-2) - 1/2)
