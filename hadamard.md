@@ -216,3 +216,8 @@ Therefore we cannot show error correction with the above example.
 Included in this project is a python script that will demonstrate this property,
 along with a video demonstration that will show messages with length 5, which 
 can be used to encode all english letters, and some punctuation. 
+
+## Sources:
+
+https://www.mdpi.com/1424-8220/24/10/3062
+

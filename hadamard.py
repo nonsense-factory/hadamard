@@ -2,44 +2,44 @@ import sys
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+
 np.set_printoptions(threshold=sys.maxsize)
 
-
 codebook = [
-    "a |  00000 | 1111111111111111 | [ 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1]",
-    "b |  00001 | 1010101010101010 | [ 1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1]",
-    "c |  00010 | 1100110011001100 | [ 1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1]",
-    "d |  00011 | 1001100110011001 | [ 1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1]",
-    "e |  00100 | 1111000011110000 | [ 1  1  1  1 -1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1]",
-    "f |  00101 | 1010010110100101 | [ 1 -1  1 -1 -1  1 -1  1  1 -1  1 -1 -1  1 -1  1]",
-    "g |  00110 | 1100001111000011 | [ 1  1 -1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1  1  1]",
-    "h |  00111 | 1001011010010110 | [ 1 -1 -1  1 -1  1  1 -1  1 -1 -1  1 -1  1  1 -1]",
-    "i |  01000 | 1111111100000000 | [ 1  1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1 -1 -1]",
-    "j |  01001 | 1010101001010101 | [ 1 -1  1 -1  1 -1  1 -1 -1  1 -1  1 -1  1 -1  1]",
-    "k |  01010 | 1100110000110011 | [ 1  1 -1 -1  1  1 -1 -1 -1 -1  1  1 -1 -1  1  1]",
-    "l |  01011 | 1001100101100110 | [ 1 -1 -1  1  1 -1 -1  1 -1  1  1 -1 -1  1  1 -1]",
-    "m |  01100 | 1111000000001111 | [ 1  1  1  1 -1 -1 -1 -1 -1 -1 -1 -1  1  1  1  1]",
-    "n |  01101 | 1010010101011010 | [ 1 -1  1 -1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1]",
-    "o |  01110 | 1100001100111100 | [ 1  1 -1 -1 -1 -1  1  1 -1 -1  1  1  1  1 -1 -1]",
-    "p |  01111 | 1001011001101001 | [ 1 -1 -1  1 -1  1  1 -1 -1  1  1 -1  1 -1 -1  1]",
-    "q |  10000 | 0000000000000000 | [-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1]",
-    "r |  10001 | 0101010101010101 | [-1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1]",
-    "s |  10010 | 0011001100110011 | [-1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1]",
-    "t |  10011 | 0110011001100110 | [-1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1]",
-    "u |  10100 | 0000111100001111 | [-1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1  1  1  1  1]",
-    "v |  10101 | 0101101001011010 | [-1  1 -1  1  1 -1  1 -1 -1  1 -1  1  1 -1  1 -1]",
-    "w |  10110 | 0011110000111100 | [-1 -1  1  1  1  1 -1 -1 -1 -1  1  1  1  1 -1 -1]",
-    "x |  10111 | 0110100101101001 | [-1  1  1 -1  1 -1 -1  1 -1  1  1 -1  1 -1 -1  1]",
-    "y |  11000 | 0000000011111111 | [-1 -1 -1 -1 -1 -1 -1 -1  1  1  1  1  1  1  1  1]",
-    "z |  11001 | 0101010110101010 | [-1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1]",
-    ". |  11010 | 0011001111001100 | [-1 -1  1  1 -1 -1  1  1  1  1 -1 -1  1  1 -1 -1]",
-    ", |  11011 | 0110011010011001 | [-1  1  1 -1 -1  1  1 -1  1 -1 -1  1  1 -1 -1  1]",
-    "' |  11100 | 0000111111110000 | [-1 -1 -1 -1  1  1  1  1  1  1  1  1 -1 -1 -1 -1]",
-    "  |  11101 | 0101101010100101 | [-1  1 -1  1  1 -1  1 -1  1 -1  1 -1 -1  1 -1  1]",
-    "? |  11110 | 0011110011000011 | [-1 -1  1  1  1  1 -1 -1  1  1 -1 -1 -1 -1  1  1]",
-    "! |  11111 | 0110100110010110 | [-1  1  1 -1  1 -1 -1  1  1 -1 -1  1 -1  1  1 -1]",
-    "  | Binary |   Encoded Binary |                          Hadamard Codebook Vector",
-    "  |--------|------------------|--------------------------------------------------"
+    " a | [ 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1] | 1111111111111111 ",
+    " b | [ 1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1] | 1010101010101010 ",
+    " c | [ 1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1] | 1100110011001100 ",
+    " d | [ 1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1] | 1001100110011001 ",
+    " e | [ 1  1  1  1 -1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1] | 1111000011110000 ",
+    " f | [ 1 -1  1 -1 -1  1 -1  1  1 -1  1 -1 -1  1 -1  1] | 1010010110100101 ",
+    " g | [ 1  1 -1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1  1  1] | 1100001111000011 ",
+    " h | [ 1 -1 -1  1 -1  1  1 -1  1 -1 -1  1 -1  1  1 -1] | 1001011010010110 ",
+    " i | [ 1  1  1  1  1  1  1  1 -1 -1 -1 -1 -1 -1 -1 -1] | 1111111100000000 ",
+    " j | [ 1 -1  1 -1  1 -1  1 -1 -1  1 -1  1 -1  1 -1  1] | 1010101001010101 ",
+    " k | [ 1  1 -1 -1  1  1 -1 -1 -1 -1  1  1 -1 -1  1  1] | 1100110000110011 ",
+    " l | [ 1 -1 -1  1  1 -1 -1  1 -1  1  1 -1 -1  1  1 -1] | 1001100101100110 ",
+    " m | [ 1  1  1  1 -1 -1 -1 -1 -1 -1 -1 -1  1  1  1  1] | 1111000000001111 ",
+    " n | [ 1 -1  1 -1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1] | 1010010101011010 ",
+    " o | [ 1  1 -1 -1 -1 -1  1  1 -1 -1  1  1  1  1 -1 -1] | 1100001100111100 ",
+    " p | [ 1 -1 -1  1 -1  1  1 -1 -1  1  1 -1  1 -1 -1  1] | 1001011001101001 ",
+    " q | [-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1] | 0000000000000000 ",
+    " r | [-1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1] | 0101010101010101 ",
+    " s | [-1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1] | 0011001100110011 ",
+    " t | [-1  1  1 -1 -1  1  1 -1 -1  1  1 -1 -1  1  1 -1] | 0110011001100110 ",
+    " u | [-1 -1 -1 -1  1  1  1  1 -1 -1 -1 -1  1  1  1  1] | 0000111100001111 ",
+    " v | [-1  1 -1  1  1 -1  1 -1 -1  1 -1  1  1 -1  1 -1] | 0101101001011010 ",
+    " w | [-1 -1  1  1  1  1 -1 -1 -1 -1  1  1  1  1 -1 -1] | 0011110000111100 ",
+    " x | [-1  1  1 -1  1 -1 -1  1 -1  1  1 -1  1 -1 -1  1] | 0110100101101001 ",
+    " y | [-1 -1 -1 -1 -1 -1 -1 -1  1  1  1  1  1  1  1  1] | 0000000011111111 ",
+    " z | [-1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1] | 0101010110101010 ",
+    " . | [-1 -1  1  1 -1 -1  1  1  1  1 -1 -1  1  1 -1 -1] | 0011001111001100 ",
+    " , | [-1  1  1 -1 -1  1  1 -1  1 -1 -1  1  1 -1 -1  1] | 0110011010011001 ",
+    " ' | [-1 -1 -1 -1  1  1  1  1  1  1  1  1 -1 -1 -1 -1] | 0000111111110000 ",
+    " ? | [-1  1 -1  1  1 -1  1 -1  1 -1  1 -1 -1  1 -1  1] | 0101101010100101 ",
+    " ! | [-1 -1  1  1  1  1 -1 -1  1  1 -1 -1 -1 -1  1  1] | 0011110011000011 ",
+    "   | [-1  1  1 -1  1 -1 -1  1  1 -1 -1  1 -1  1  1 -1] | 0110100110010110 ",
+    "   |                          Hadamard Codebook Vector |   Encoded Binary ",
+    "---|---------------------------------------------------|----------------- ",
 ]
 
 def hadamard_matrix(n: int) -> np.ndarray:
@@ -84,7 +84,7 @@ def convert_to_binary(encoded_message: np.ndarray) -> str:
     binary_string = ""
 
     for i in encoded_message:
-        binary_string += "\n"
+        # binary_string += "\n"
         for j in i:
             if j == 1:
                 binary_string += convert_bin[1]
@@ -99,7 +99,8 @@ def introduce_error(codeword: np.ndarray, num_errors: int) -> np.ndarray :
     """
     corrupted = codeword
     for i in corrupted:
-        change = random.sample(range(0, codeword.shape[1]), num_errors)
+        errors = random.randint(0, num_errors)
+        change = random.sample(range(0, codeword.shape[1]), errors)
         for j in change:
             i[j] = 1 if i[j] == -1 else -1
 
@@ -140,6 +141,8 @@ def decode(corrupted: np.ndarray, HM: np.ndarray):
         if waits >= 0:
             input()
             waits -= 1
+        else :
+            print("\n")
         recovered_index.append(index)
 
     return recovered_index
@@ -168,42 +171,47 @@ def main():
     ### Recursively call the generating function 5 times to produce a 16x16 
     ### hadamard matrix
     HM = hadamard_matrix(4)
-    print("Hadamard Error Correction Demonstration\n\n")
+    print("\n\n\t\t***************************************\n")
+    print("\t\tHadamard Error Correction Demonstration\n")
+    print("\t\t***************************************\n\n")
     print("First we generate an NxN Hadamard matrix using the Sylvester method."
-    " For this demonstration we will be using N = 16. This will be the size of "
+    "For this demonstration we will be using N = 16. This will be the size of\n"
     "the encoded 'word'.")
     print(HM)
     print("To create a codebook, we can take the Hadamard Matrix HM, and append"
-    " -HM to the bottom, creating an N x 2N matrix C. Each row in C will be "
-    "used to encode a 'word', in this case a character. Note that because there"
-    " are 32 rows, we can encode 32 different 'word', which will include all the"
-    " lower case letters plus some common punctuation. For more details see the "
-    "completed codebook in codebook.md.")
+    " -HM\nto the bottom, creating an N x 2N matrix C. Each row in C will be "
+    "used to\nencode a 'word', in this case we will encode one character per word."
+    "\nNote that because there are 16 rows in HM, and another 16 rows in -HM, "
+    "we\ncan encode 16 * 2 = 32 different 'words', which will include all the "
+    "\nlower case letters plus some common punctuation.\nFor mdetails see the"
+    " completed codebook in codebook.md.")
     
     try:
-        user = input("\nPlease enter the maximum number of bit flip errors that can occur per 'word'")
-        print(user)
+        user = input("\nPlease enter the maximum number of bit flip errors "
+        "posible per 'word': ")
         if user == "":
             print("Using default = 3")
             num_errors = 3
         else:
             num_errors = int(user)
         if num_errors < 0 or num_errors > 16:
-            print("Error: Cannot have less than 0 or more than 16 errors per 'word'\n")
+            print("Error: Cannot have less than 0 or more than 16 errors per "
+            "'word'\n")
     except:
         print("Invalid input")
         return
     
     ### Generate the Hadamard Codebook.
     Codebook = np.concatenate((HM, -HM), axis=0)
-    Message = ""
-    for i in sys.argv[1:] :
-        Message = Message + i + " "
+    Message = sys.argv[1]
+    for i in sys.argv[2:] :
+        Message = Message + " " + i
+    
 
 
-    input("Message: \"" + Message + "\"\nPress enter to continue...")
+    input("\nConfirming message: \"" + Message + "\"\nPress enter to continue...")
     encoded_message, sending_num_list = encode(Message, Codebook)
-    print("Convert message to numeric values:")
+    print("\nConvert message to numeric values:")
     print(sending_num_list)
     
     
@@ -234,12 +242,13 @@ def main():
 
 
     input("\nPress enter to continue...")
-    print("For each recieved vector of 16 bits, multiply it by the original matrix HM to recover the message.\n") 
+    print("For each recieved vector of 16 bits, multiply\nit by the original matrix\n"
+    "HM to recover the message.\n") 
     recieving_num_list = decode(corrupted_message, HM)
 
 
     print("\nRecovered messages: ", recieving_num_list)
-    print("Convert negative indexes I with transformation I = I * -1 + 16")
+    print("Convert negative indexes I with transformation I' = I * -1 + 16")
     for i in range(0, len(recieving_num_list)):
         recieving_num_list[i] = (recieving_num_list[i]) if recieving_num_list[i] >= 0 else recieving_num_list[i] * -1 + 16
     print(recieving_num_list)
@@ -249,10 +258,13 @@ def main():
     print("Recieved decoding is : ", recieving_num_list)
 
     print("\nIf you chose a number larger than 3, you will likely see the errors in"
-    " the resulting string.")
+    " the\nresulting string.")
     msg = display_decoded_message(recieving_num_list)
-    print(msg)
-    print("\n\nDemonstration complete!")
+    print("\n\tOriginal message: \"" + Message + "\"")
+    print("\t Decoded message: \"" + msg + "\"\n")
+    print("\t  ***********************\n")
+    print("\t  Demonstration complete!\n")
+    print("\t  ***********************")
 
 
 if __name__ == "__main__":
